@@ -23,7 +23,7 @@
     "sinon-chai": "^2.8.0",
     "webpack": "^1.13.1"
   },
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A sass-loader importer function which smooths out issues when resolving node_module scss files",
   "main": "src/index.js",
   "scripts": {
