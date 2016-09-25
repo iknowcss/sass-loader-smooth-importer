@@ -25,9 +25,12 @@
   },
   "version": "0.1.0",
   "description": "A sass-loader importer function which smooths out issues when resolving node_module scss files",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-register --require src/.mocha.js \"src/**/*.test.js\""
+    "build": "babel -d dist --ignore \"**/*.test.*\" src",
+    "clean": "rm -rf dist/ 2> /dev/null",
+    "test": "mocha --compilers js:babel-register --require src/.mocha.js \"src/**/*.test.js\"",
+    "prepublish": "npm run test && npm run clean && npm run build"
   },
   "keywords": [
     "webpack",
