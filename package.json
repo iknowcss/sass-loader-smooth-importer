@@ -1,0 +1,38 @@
+{
+  "name": "sass-loader-smooth-importer",
+  "dependencies": {
+    "bluebird": "^3.4.1",
+    "json5": "^0.5.0"
+  },
+  "peerDependencies": {
+    "sass-loader": "^4.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.7.5",
+    "babel-core": "^6.13.2",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-object-rest-spread": "^6.5.0",
+    "babel-preset-es2015": "^6.13.2",
+    "babel-preset-react": "^6.5.0",
+    "babel-register": "^6.7.2",
+    "babelify": "^7.2.0",
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5",
+    "proxyquire": "^1.7.4",
+    "sinon": "^1.17.3",
+    "sinon-chai": "^2.8.0",
+    "webpack": "^1.13.1"
+  },
+  "version": "0.0.0",
+  "description": "A sass-loader importer function which smooths out issues when resolving node_module scss files",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "mocha --compilers js:babel-register --require src/.mocha.js \"src/**/*.test.js\""
+  },
+  "keywords": [
+    "webpack",
+    "scss"
+  ],
+  "author": "Cody Jenkins <cjenkins@dius.com.au>",
+  "license": "MIT"
+}
