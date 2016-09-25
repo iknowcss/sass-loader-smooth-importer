@@ -2,7 +2,7 @@ import path from 'path';
 import JSON5 from 'json5';
 import {dirStat, exists, readUtf8File, resolveModulePath} from './fileUtil';
 
-const requiresSpecialHandling = (modules, importName) => {
+const requiresSpecialHandling = (modules, importName = '') => {
   const moduleName = importName.split('/')[0];
   return modules.indexOf(moduleName) >= 0;
 };
@@ -57,7 +57,7 @@ export default (options = {}) => {
           done({file: newFile});
         })
         .catch((e) => {
-          console.error(`Error loading module "${file}"`, e);
+          console.error(`Error loading module "${file}" in ${prev}`, e);
           done({file});
         });
     } else {

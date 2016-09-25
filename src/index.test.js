@@ -28,8 +28,6 @@ describe('index', () => {
       });
   });
 
-  it('prints an error when it cannot find a file');
-
   describe('using package.json metadata', () => {
     it('reads the "main.css" field to find the right file', () => {
       return runTest('@namespaced-styles/grid')
@@ -81,6 +79,30 @@ describe('index', () => {
       return runTest('@namespaced-components/table', mockAbsolutePath('node_modules/@namespaced-styles/typography/index.scss'))
         .then(({file}) => {
           expect(file).to.eql(mockAbsolutePath('node_modules/@namespaced-components/table/dist/table.scss'))
+        });
+    });
+  });
+
+  describe('error handling', () => {
+    const consoleSandbox = sinon.sandbox.create();
+
+    afterEach(() => {
+      consoleSandbox.restore();
+    });
+
+    it('logs an error when it cannot load a module', () => {
+      const prevPath = mockAbsolutePath('node_modules/@namespaced-styles/typography/index.scss');
+
+      consoleSandbox.stub(global.console);
+      return runTest('@namespaced-styles/non-existent', prevPath)
+        .then(({file}) => {
+          expect(file).to.eql('@namespaced-styles/non-existent');
+          expect(global.console.error).to.have.been.calledOnce;
+
+          const [message, error] = global.console.error.args[0];
+          expect(message).to.eql(`Error loading module "@namespaced-styles/non-existent" in ${prevPath}`);
+          expect(error).to.be.instanceOf(Error);
+          consoleSandbox.restore();
         });
     });
   });
